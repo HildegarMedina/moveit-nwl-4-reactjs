@@ -12,7 +12,7 @@ interface Challenge {
 interface ChallengesContextData {
     level: number,
     currentExperience: number,
-    challengesCompleted: number,
+    challengeCompletes: number,
     experienceToNextLevel: number,
     levelUp: () => void,
     startNewChallenge: () => void,
@@ -37,7 +37,7 @@ export function ChallengesProvider({children,
 
     const [level, setLevel] = useState(rest.level ?? 1);
     const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0);
-    const [challengesCompleted, setChallengesCompleted] = useState(rest.challengeCompletes ?? 0);
+    const [challengeCompletes, setChallengesCompleted] = useState(rest.challengeCompletes ?? 0);
     const [activeChallenge, setActiveChallenge] = useState(null);
     const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
 
@@ -50,8 +50,8 @@ export function ChallengesProvider({children,
     useEffect(() => {
         Cookies.set("level", String(level));
         Cookies.set("currentExperience", String(currentExperience));
-        Cookies.set("challengesCompleted", String(challengesCompleted));
-    }, [level, currentExperience, challengesCompleted])
+        Cookies.set("challengeCompletes", String(challengeCompletes));
+    }, [level, currentExperience, challengeCompletes])
 
     function levelUp() {
         setLevel(level+1);
@@ -94,14 +94,14 @@ export function ChallengesProvider({children,
 
         setCurrentExperience(finalExperience);
         setActiveChallenge(null);
-        setChallengesCompleted(challengesCompleted + 1);
+        setChallengesCompleted(challengeCompletes + 1);
     }
 
     return(
         <ChallengesContext.Provider value={{
                 level, 
                 currentExperience, 
-                challengesCompleted, 
+                challengeCompletes, 
                 experienceToNextLevel,
                 levelUp, 
                 startNewChallenge,
